@@ -13,10 +13,6 @@ bot.command('quit', async (ctx) => {
 	await ctx.leaveChat();
 });
 
-
-// Tea🍵
-
-
 const DATA_BASE = {
 	Monday: {
 		'/morning': 'Pav Bhaji + Tea🍵',
@@ -81,6 +77,9 @@ bot.on(message('text'), async (ctx) => {
 	const weekDay = Intl.DateTimeFormat(Intl.Locale.current, {
 		weekday: 'long',
 	}).format(new Date());
+
+
+	console.log(ctx) ;
 
 
 	const food = (await DATA_BASE[weekDay][selected_time]) || 'ok';

@@ -42,3 +42,6 @@ const DATA_BASE = {
 		'/night': `[ 🍽️ Paid 💰 ] -- Aloo Palak , Mix dal`,
 	},
 };
+
+
+export { DATA_BASE } ;
