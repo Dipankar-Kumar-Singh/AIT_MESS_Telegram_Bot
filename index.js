@@ -1,6 +1,7 @@
 import { Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
 import dotenv from 'dotenv';
+import { inlineKeyboard } from 'telegraf/typings/markup';
 
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -79,10 +80,7 @@ bot.on(message('text'), async (ctx) => {
 	}).format(new Date());
 
 
-	console.log(ctx) ;
-
-
-	const food = (await DATA_BASE[weekDay][selected_time]) || 'ok';
+	const food = (await DATA_BASE[weekDay][selected_time]) || 'Please Select the Options from List';
 	await ctx.reply(food) ;
 
 	// Using context shortcut
@@ -104,10 +102,17 @@ bot.on('inline_query', async (ctx) => {
 
 	// Using context shortcut
 	await ctx.answerInlineQuery(result);
+
 });
 
+
+bot.start(bot.reply('Started'))
 bot.launch();
 
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+
+
+
