@@ -16,6 +16,7 @@ bot.command('quit', async (ctx) => {
 
 // Tea🍵
 
+
 const DATA_BASE = {
 	Monday: {
 		'/morning': 'Pav Bhaji + Tea🍵',
@@ -70,8 +71,6 @@ bot.on(message('text'), async (ctx) => {
 
 	const selected_time = ctx.update.message.text;
 
-	console.dir(selected_time);
-
 	const HourTime = Number(
 		Intl.DateTimeFormat('en', {
 			hour: 'numeric',
@@ -83,14 +82,9 @@ bot.on(message('text'), async (ctx) => {
 		weekday: 'long',
 	}).format(new Date());
 
-	if (selected_time === '/morning') {
-		const food = (await DATA_BASE[weekDay][selected_time]) || 'ok';
-		console.log(DATA_BASE[weekDay][selected_time]);
-		console.log(DATA_BASE[weekDay]);
 
-		await ctx.reply(food);
-		return;
-	}
+	const food = (await DATA_BASE[weekDay][selected_time]) || 'ok';
+	await ctx.reply(food) ;
 
 	// Using context shortcut
 	// await ctx.reply(`HIMANSHU .. YO  , ${ctx.state.role}`);
