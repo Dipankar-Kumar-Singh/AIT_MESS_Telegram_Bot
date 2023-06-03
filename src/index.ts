@@ -73,7 +73,10 @@ bot.on(message('text'), async (ctx) => {
 		weekday: 'long',
 	}).format(new Date());
 
-	if(weekDay!= DATA_BASE.Monday.afternoon)
+	// const weekdaysOptions = Object.keys(DATA_BASE) ;
+	// if(weekdaysOptions.includes(weekDay)){
+	// 	ctx.reply("YES.... day done")
+	// }
 
 	const food = (await DATA_BASE[weekDay][selected_time]) ||'Please Select the Options from List';
 	await ctx.reply(food);
@@ -87,7 +90,7 @@ bot.on('callback_query', async (ctx) => {
 	await ctx.answerCbQuery();
 });
 
-bot.start(bot.reply('Started'));
+
 bot.launch();
 
 // Enable graceful stop
