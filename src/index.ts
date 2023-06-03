@@ -1,15 +1,13 @@
 import { Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
 import dotenv from 'dotenv';
-import { inlineKeyboard } from 'telegraf/typings/markup';
 
 dotenv.config();
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN || "noKey");
 
 bot.command('quit', async (ctx) => {
 	// Explicit usage
 	await ctx.telegram.leaveChat(ctx.message.chat.id);
-
 	// Using context shortcut
 	await ctx.leaveChat();
 });
@@ -60,31 +58,16 @@ const DATA_BASE = {
 };
 
 bot.on(message('text'), async (ctx) => {
-	// Explicit usage
-	// await ctx.telegram.sendMessage(
-	// 	ctx.message.chat.id,
-	// 	`Hello1 ${ctx.state.role}`
-	// );
 
 	const selected_time = ctx.update.message.text;
-
-	const HourTime = Number(
-		Intl.DateTimeFormat('en', {
-			hour: 'numeric',
-			hour12: false,
-		}).format(new Date())
-	);
 
 	const weekDay = Intl.DateTimeFormat(Intl.Locale.current, {
 		weekday: 'long',
 	}).format(new Date());
 
-
 	const food = (await DATA_BASE[weekDay][selected_time]) || 'Please Select the Options from List';
 	await ctx.reply(food) ;
 
-	// Using context shortcut
-	// await ctx.reply(`HIMANSHU .. YO  , ${ctx.state.role}`);
 });
 
 bot.on('callback_query', async (ctx) => {
@@ -95,15 +78,6 @@ bot.on('callback_query', async (ctx) => {
 	await ctx.answerCbQuery();
 });
 
-bot.on('inline_query', async (ctx) => {
-	const result = [];
-	// Explicit usage
-	await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result);
-
-	// Using context shortcut
-	await ctx.answerInlineQuery(result);
-
-});
 
 
 bot.start(bot.reply('Started'))
@@ -115,4 +89,4 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 
 
-
+export{} ;
