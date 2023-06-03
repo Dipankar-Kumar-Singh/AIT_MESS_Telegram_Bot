@@ -1,3 +1,6 @@
+const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
+// system local
+
 const HourTime = Number(
     Intl.DateTimeFormat('en', {
         hour: 'numeric',
@@ -5,7 +8,7 @@ const HourTime = Number(
     }).format(new Date())
 );
 
-const weekDay = Intl.DateTimeFormat(Intl.Locale.current, {
+const weekDay = Intl.DateTimeFormat(locale , {
     weekday: 'long',
 }).format(new Date());
 

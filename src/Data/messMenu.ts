@@ -1,4 +1,10 @@
-const DATA_BASE = {
+interface MessMenu { 
+	[day : string] : {
+		[time : string] : string 
+	}
+}
+
+const DATA_BASE:MessMenu = {
 	Monday: {
 		'/morning': 'Pav Bhaji + Tea🍵',
 		'/afternoon': '🍆 Baingan-Bharta, 🐄 Curd',

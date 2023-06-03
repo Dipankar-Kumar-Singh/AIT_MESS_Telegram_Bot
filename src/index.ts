@@ -85,9 +85,8 @@ bot.on(message('text'), async (ctx) => {
 bot.on('callback_query', async (ctx) => {
 	// Explicit usage
 	await ctx.telegram.answerCbQuery(ctx.callbackQuery.id);
-
 	// Using context shortcut
-	await ctx.answerCbQuery();
+	await ctx.answerCbQuery("Yo....");
 });
 
 
