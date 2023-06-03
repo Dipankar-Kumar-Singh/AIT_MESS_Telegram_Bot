@@ -3,7 +3,7 @@ import { message } from 'telegraf/filters';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const bot = new Telegraf(process.env.BOT_TOKEN || "noKey");
+const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
 
 bot.command('quit', async (ctx) => {
 	// Explicit usage
@@ -12,7 +12,13 @@ bot.command('quit', async (ctx) => {
 	await ctx.leaveChat();
 });
 
-const DATA_BASE = {
+interface MessMenu {
+	[day: string]: {
+		[time: string]: string;
+	};
+}
+
+const DATA_BASE: MessMenu = {
 	Monday: {
 		'/morning': 'Pav Bhaji + Tea🍵',
 		'/afternoon': '🍆 Baingan-Bharta, 🐄 Curd',
@@ -34,7 +40,7 @@ const DATA_BASE = {
 	Thursday: {
 		'/morning': `Puri Bhaji + Tea🍵`,
 		'/afternoon': `Rajma-masala + Curd`,
-		'/evening':`'Poha , Coffee`,
+		'/evening': `'Poha , Coffee`,
 		'/night': `Aloo Gobhi / Kofta Curry`,
 	},
 	Friday: {
@@ -56,18 +62,21 @@ const DATA_BASE = {
 		'/night': `[ 🍽️ Paid 💰 ] -- Aloo Palak , Mix dal`,
 	},
 };
+// const locale = Intl.Locale.current as string;
 
 bot.on(message('text'), async (ctx) => {
+	const selected_time: string = ctx.update.message.text;
 
-	const selected_time = ctx.update.message.text;
+	const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 
-	const weekDay = Intl.DateTimeFormat(Intl.Locale.current, {
+	const weekDay: string = Intl.DateTimeFormat(locale, {
 		weekday: 'long',
 	}).format(new Date());
 
-	const food = (await DATA_BASE[weekDay][selected_time]) || 'Please Select the Options from List';
-	await ctx.reply(food) ;
+	if(weekDay!= DATA_BASE.Monday.afternoon)
 
+	const food = (await DATA_BASE[weekDay][selected_time]) ||'Please Select the Options from List';
+	await ctx.reply(food);
 });
 
 bot.on('callback_query', async (ctx) => {
@@ -78,15 +87,11 @@ bot.on('callback_query', async (ctx) => {
 	await ctx.answerCbQuery();
 });
 
-
-
-bot.start(bot.reply('Started'))
+bot.start(bot.reply('Started'));
 bot.launch();
 
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-
-
-export{} ;
+export {};
