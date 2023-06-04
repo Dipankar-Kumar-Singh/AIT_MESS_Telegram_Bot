@@ -21,7 +21,7 @@ async function showKeyboard (ctx: any){
 }
 
 bot.start(async (ctx)=>{
-	greetMember(ctx) ;
+	await greetMember(ctx) ;
 	await ctx.reply('How can I help you .. ' , keyboard.inline());
 })
 
