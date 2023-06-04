@@ -5,6 +5,7 @@ import { DATA_BASE } from './Data/messMenu.js';
 import { weekDay } from './Utils/DayTime.js';
 import { Keyboard } from 'telegram-keyboard';
 import { getMenuOption } from './Utils/OptionsDecoder.js';
+import { greetMember } from './Messages/startGreet.js';
 
 dotenv.config();
 
@@ -14,10 +15,15 @@ const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
 	.oneTime(false)
 	.resize();
 
-
 async function showKeyboard (ctx: any){
+	await ctx.reply("🤖") ;
 	await ctx.reply('Anything else you want to know ? ' , keyboard.inline());
 }
+
+bot.start(async (ctx)=>{
+	greetMember(ctx) ;
+	await ctx.reply('How can I help you .. ' , keyboard.inline());
+})
 
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
