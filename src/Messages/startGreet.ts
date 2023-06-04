@@ -1,7 +1,6 @@
 async function greetMember(ctx: any) {
-	await ctx.reply('Welcome🫠😀');
-	await ctx.reply('😀');
-	await ctx.reply('🫠');
+	await ctx.reply('Welcome...............');
+	await ctx.reply('👋');
 	await ctx.reply('🤖');
 
 	const aboutMe: string = `
