@@ -16,7 +16,7 @@ async function showKeyboard(ctx) {
     await ctx.reply('Anything else you want to know ? ', keyboard.inline());
 }
 bot.start(async (ctx) => {
-    greetMember(ctx);
+    await greetMember(ctx);
     await ctx.reply('How can I help you .. ', keyboard.inline());
 });
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
