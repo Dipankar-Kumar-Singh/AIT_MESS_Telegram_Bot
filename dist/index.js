@@ -7,14 +7,15 @@ import { Keyboard } from 'telegram-keyboard';
 import { getMenuOption } from './Utils/OptionsDecoder.js';
 import { greetMember } from './Messages/startGreet.js';
 import { getRandomEmoji } from './Messages/EmojiGenerator.js';
+import { decorateFoodOutput } from './Messages/Deorator.js';
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
 const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
     .oneTime(false)
     .resize();
-async function showKeyboard(ctx) {
-    // await ctx.reply("🤖") ;
+async function footerMessage(ctx) {
     await ctx.reply(getRandomEmoji());
+    await ctx.reply('For more options : ↙️ Click ≡ Menu Button');
     await ctx.reply('Anything else you want to know ? ', keyboard.inline());
 }
 bot.start(async (ctx) => {
@@ -24,25 +25,31 @@ bot.start(async (ctx) => {
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
     const selected_time = ctx.update.message.text;
-    const food = DATA_BASE[weekDay][selected_time] || 'Please Select the Options from List';
+    let food = DATA_BASE[weekDay][selected_time];
+    food = decorateFoodOutput(food);
     await ctx.reply(food);
-    showKeyboard(ctx);
+    footerMessage(ctx);
 });
 bot.on(message('text'), async (ctx) => {
     // Get the option selected by the user from the message
-    const selected_time = getMenuOption(ctx.update.message.text);
+    const menu_option = ctx.update.message.text;
+    const selected_time = getMenuOption(menu_option);
     // If the user has selected a valid option
     if (selected_time) {
         // Get the food for this option on the current day
         const food = DATA_BASE[weekDay][selected_time];
         // Send the food to the user
         return await ctx.reply(food);
-        showKeyboard(ctx);
+        footerMessage(ctx);
+    }
+    else {
+        ctx.reply('please select');
     }
     // If the user has not selected an option yet, send the available options
     // await ctx.reply('Please Select the Time', keyboard.inline());
-    await ctx.reply('Please Select the Time', keyboard.reply());
+    footerMessage(ctx);
 });
+// To handle the Inline Keyboard selection ... 
 bot.on('callback_query', async (ctx) => {
     // Get the selected time from the callback query
     let selected_time = ctx.update.callback_query;
@@ -54,7 +61,7 @@ bot.on('callback_query', async (ctx) => {
         ctx.reply(food);
         // Answer the callback query
         await ctx.answerCbQuery('🫠🫠🙃');
-        showKeyboard(ctx);
+        footerMessage(ctx);
     }
 });
 bot.launch();
