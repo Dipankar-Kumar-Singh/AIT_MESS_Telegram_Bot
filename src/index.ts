@@ -8,6 +8,8 @@ import { getMenuOption } from './Utils/OptionsDecoder.js';
 import { greetMember } from './Messages/startGreet.js';
 import { getRandomEmoji } from './Messages/EmojiGenerator.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
+import { OACHandler } from './Messages/OACHandler.js';
+import { foodCourtHanlder } from './Messages/foodCourthanlder.js';
 
 dotenv.config();
 
@@ -25,11 +27,15 @@ async function footerMessage (ctx: any){
 
 bot.start(async (ctx)=>{
 	await greetMember(ctx) ;
-	await ctx.reply('How can I help you .. ' , keyboard.inline());
+	await ctx.reply('Select Option' , keyboard.inline());
+	await ctx.reply('You can Also select Option from Keyboard At Bottom', keyboard.reply());
 })
 
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
 // Main hanlder .. 
+
+//!!!!!!!!!!!!!! Add more generic .... add options to find intent of the user .. 
+// Add Natural Language Proccessing to it .... 
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	const selected_time: string = ctx.update.message.text;
 	let food = DATA_BASE[weekDay][selected_time] ;
@@ -38,7 +44,21 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	footerMessage(ctx) ;
 });
 
+bot.hears(/OAC|FoodCourt/ , async (ctx)=>{
+	const item : string = ctx.update.message.text;
+	if(item === 'OAC'){
+		await OACHandler(ctx) ;
+	} else if(item === 'FoodCourt'){
+		await foodCourtHanlder(ctx) ;
+	}
+	footerMessage(ctx) ;
+})
+
+
 // for all the generic pourous message... 
+// Only use this for menu handling .... 
+// Menue Conntent ... [ Whata's now in mess  , OAC Menue , Foood Court Menue .... ] 
+// for what's now ... show the keyboard .. // Process the time slot ..and reply acordingly [ Find Now Slot ] .. 
 
 bot.on(message('text'), async (ctx) => {
 	const menu_option = ctx.update.message.text ;
@@ -59,11 +79,14 @@ bot.on('callback_query', async (ctx: any) => {
 	let selected_time: any = (ctx.update.callback_query as any).data;
 	if (selected_time) {
 		const food = DATA_BASE[weekDay][selected_time];
+		await ctx.answerCbQuery(`🙃 Enjoy your ${selected_time}`);
 		ctx.reply(food);
-		await ctx.answerCbQuery('🫠🫠🙃');
 		footerMessage(ctx) ;
 	}
+
+
 });
+
 
 
 bot.launch();
