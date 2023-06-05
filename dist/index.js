@@ -23,6 +23,7 @@ bot.start(async (ctx) => {
     await ctx.reply('How can I help you .. ', keyboard.inline());
 });
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
+// Main hanlder .. 
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
     const selected_time = ctx.update.message.text;
     let food = DATA_BASE[weekDay][selected_time];
@@ -30,6 +31,7 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
     await ctx.reply(food);
     footerMessage(ctx);
 });
+// for all the generic pourous message... 
 bot.on(message('text'), async (ctx) => {
     // Get the option selected by the user from the message
     const menu_option = ctx.update.message.text;
@@ -43,7 +45,7 @@ bot.on(message('text'), async (ctx) => {
         footerMessage(ctx);
     }
     else {
-        ctx.reply('please select');
+        ctx.reply('please select from given options');
     }
     // If the user has not selected an option yet, send the available options
     // await ctx.reply('Please Select the Time', keyboard.inline());
