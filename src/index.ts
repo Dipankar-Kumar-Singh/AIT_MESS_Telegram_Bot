@@ -8,7 +8,7 @@ import { getMenuOption } from './Utils/OptionsDecoder.js';
 import { greetMember } from './Messages/startGreet.js';
 import { getRandomEmoji } from './Messages/EmojiGenerator.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
-import { uploadImage } from './Utils/ImageUpload.js';
+
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
@@ -40,48 +40,26 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 
 // for all the generic pourous message... 
 
-bot.command('upload' , async () => {
-	
-	for(let i = 0 ; i < 4 ; i++){
-		const imagPath = `c:/CODE_C/Projects/AIT_MESS_Telegram_Bot/public/images/FoodCourt/${i}.jpg` ;
-		uploadImage(imagPath,'CHAT_ID_HERE') 
-	}
-}) ;
-
-
-
 bot.on(message('text'), async (ctx) => {
-	// Get the option selected by the user from the message
 	const menu_option = ctx.update.message.text ;
 	const selected_time: string | undefined = getMenuOption(menu_option);
 	// If the user has selected a valid option
 	if (selected_time) {
-		// Get the food for this option on the current day
 		const food = DATA_BASE[weekDay][selected_time];
-		// Send the food to the user
-		return await ctx.reply(food);
-		footerMessage(ctx) ;
+		await ctx.reply(food);
 	} else {
 		ctx.reply('please select from given options')
 	}
-
 	// If the user has not selected an option yet, send the available options
 	// await ctx.reply('Please Select the Time', keyboard.inline());
 	footerMessage(ctx) ;
 });
 
-
-// To handle the Inline Keyboard selection ... 
 bot.on('callback_query', async (ctx: any) => {
-    // Get the selected time from the callback query
-	let selected_time: any = ctx.update.callback_query as any;
-	selected_time = selected_time.data;
+	let selected_time: any = (ctx.update.callback_query as any).data;
 	if (selected_time) {
-		// Get the food for the selected time
 		const food = DATA_BASE[weekDay][selected_time];
-		// Reply to the user with the food
 		ctx.reply(food);
-		// Answer the callback query
 		await ctx.answerCbQuery('🫠🫠🙃');
 		footerMessage(ctx) ;
 	}
@@ -89,7 +67,6 @@ bot.on('callback_query', async (ctx: any) => {
 
 
 bot.launch();
-
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));

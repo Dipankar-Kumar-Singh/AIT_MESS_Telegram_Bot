@@ -8,6 +8,7 @@ import { getMenuOption } from './Utils/OptionsDecoder.js';
 import { greetMember } from './Messages/startGreet.js';
 import { getRandomEmoji } from './Messages/EmojiGenerator.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
+import { uploadImage } from './Utils/ImageUpload.js';
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
 const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
@@ -29,9 +30,22 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
     let food = DATA_BASE[weekDay][selected_time];
     food = decorateFoodOutput(food);
     await ctx.reply(food);
+    const photoID = 'AgACAgUAAxkDAAIFVmR9xWxBypXl90rhFQi0VVNBYFR6AAJ9vDEbEa_xV8eRd2uawoz1AQADAgADcwADLwQ';
+    ctx.reply("I am running 🙋‍♂️🙋‍♂️🙋‍♂️🙋‍♂️🙋‍♂️🙋‍♂️🙋‍♂️😈😈😈");
+    await ctx.replyWithPhoto({ source: photoID });
     footerMessage(ctx);
 });
 // for all the generic pourous message... 
+bot.command('upload', async (ctx) => {
+    for (let i = 1; i <= 4; i++) {
+        const imagPath = `c:/CODE_C/Projects/AIT_MESS_Telegram_Bot/public/images/FoodCourt/${i}.jpg`;
+        const ref = await uploadImage(imagPath, '1276073176');
+        ctx.reply(ref);
+        console.log("PHOTO ", i, "  : ");
+        console.log(ref);
+        console.log();
+    }
+});
 bot.on(message('text'), async (ctx) => {
     // Get the option selected by the user from the message
     const menu_option = ctx.update.message.text;

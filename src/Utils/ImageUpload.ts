@@ -11,10 +11,12 @@ async function uploadImage(photoPath:any , CHAT_ID:string) {
 	try {
 	  const response = await bot.telegram.sendPhoto(CHAT_ID, { source: photoStream });
 	  const photoReference = response.photo[0].file_id;
-	  bot.telegram.sendPhoto(CHAT_ID , photoReference) ;
-	  console.log('Photo uploaded:', photoReference);
+	//   bot.telegram.sendPhoto(CHAT_ID , photoReference) ;
+	//   console.log(`Photo uploaded:`, photoReference);
+      return photoReference;
 	} catch (error) {
 	  console.error('Error uploading photo:', error);
+      return "error" ;
 	}
 }
 
