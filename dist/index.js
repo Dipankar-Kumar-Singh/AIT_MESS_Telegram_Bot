@@ -4,12 +4,34 @@ import dotenv from 'dotenv';
 import { DATA_BASE } from './Data/messMenu.js';
 import { weekDay } from './Utils/DayTime.js';
 import * as fs from 'fs';
+const CHAT_ID = '1276073176';
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
+async function uploadImage() {
+    // const photoPath = './food.webp'; // Path to your local image file
+    // const photoPath = path.join(__dirname, 'food.webp');
+    // const currentModulePath = new URL(import.meta.url).pathname;
+    // // const photoPath = path.join(path.dirname(currentModulePath), 'food.webp');
+    // const photoPath = path.resolve(path.dirname(currentModulePath), 'food.webp');
+    // const currentModuleDir = path.dirname(__filename);
+    // const photoPath = path.resolve(currentModuleDir, 'food.webp');
+    let photoPath = "C:/CODE_C/Projects/AIT_MESS_Telegram_Bot/src/food.webp";
+    const photoStream = fs.createReadStream(photoPath);
+    try {
+        const response = await bot.telegram.sendPhoto(CHAT_ID, { source: photoStream });
+        const photoReference = response.photo[0].file_id;
+        bot.telegram.sendPhoto(CHAT_ID, photoReference);
+        console.log('Photo uploaded:', photoReference);
+    }
+    catch (error) {
+        console.error('Error uploading photo:', error);
+    }
+}
 bot.command('upload', (ctx) => {
-    let imageFilePath = "C:/CODE_C/Projects/AIT_MESS_Telegram_Bot/src/food_american.webp";
-    const imageStream = fs.createReadStream(imageFilePath);
-    ctx.replyWithPhoto({ source: imageStream });
+    uploadImage();
+    // let imageFilePath = "C:/CODE_C/Projects/AIT_MESS_Telegram_Bot/src/food.webp" ;
+    // const imageStream = fs.createReadStream(imageFilePath);
+    // ctx.replyWithPhoto({ source: imageStream });
 });
 bot.on(message('text'), async (ctx) => {
     const selected_time = ctx.update.message.text;
@@ -18,8 +40,9 @@ bot.on(message('text'), async (ctx) => {
     // await ctx.reply((ctx.chat.id).toString()) ;
     console.log(ctx);
     // Testing ..
-    await ctx.replyWithPhoto('https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');
-    await ctx.replyWithPhoto('https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');
+    // await ctx.replyWithPhoto(
+    // 	'https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80'
+    // );
     // ctx.telegram.getChat() ;
 });
 bot.on(message('photo'), async (ctx) => {
