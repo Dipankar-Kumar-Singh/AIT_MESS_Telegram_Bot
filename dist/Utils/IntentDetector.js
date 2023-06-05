@@ -15,4 +15,4 @@ function intent(data) {
         }
     });
 }
-export {};
+export { intent };

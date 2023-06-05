@@ -10,6 +10,7 @@ import { getRandomEmoji } from './Messages/EmojiGenerator.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
 import { OACHandler } from './Messages/OACHandler.js';
 import { foodCourtHanlder } from './Messages/foodCourthanlder.js';
+import { intent } from './Utils/IntentDetector.js';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
 	.resize();
 
 async function footerMessage (ctx: any){
-	await ctx.reply(getRandomEmoji()) ;
+	// await ctx.reply(getRandomEmoji()) ;
 	await ctx.reply('For more options : ↙️ Click ≡ Menu Button') ;
 	await ctx.reply('Anything else you want to know ? ' , keyboard.inline());
 }
@@ -34,7 +35,7 @@ bot.start(async (ctx)=>{
 // The bot will respond to the user input with the appropriate meal by using the hears() method.
 // Main hanlder .. 
 
-//!!!!!!!!!!!!!! Add more generic .... add options to find intent of the user .. 
+//!!!!!!!!!!!!!!TODO :  Add more generic .... add options to find intent of the user .. 
 // Add Natural Language Proccessing to it .... 
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	const selected_time: string = ctx.update.message.text;
@@ -44,13 +45,18 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	footerMessage(ctx) ;
 });
 
-bot.hears(/OAC|FoodCourt/ , async (ctx)=>{
-	const item : string = ctx.update.message.text;
-	if(item === 'OAC'){
-		await OACHandler(ctx) ;
-	} else if(item === 'FoodCourt'){
-		await foodCourtHanlder(ctx) ;
-	}
+
+bot.command('mess' ,async (ctx) => {
+	await ctx.reply( "Select the Time " , keyboard.reply());
+})
+
+bot.command('oac' , async (ctx) => {
+	await OACHandler(ctx) ;
+	footerMessage(ctx) ;
+});
+
+bot.command('foodcourt' , async(ctx) => {
+	await foodCourtHanlder(ctx) ;
 	footerMessage(ctx) ;
 })
 
@@ -61,8 +67,11 @@ bot.hears(/OAC|FoodCourt/ , async (ctx)=>{
 // for what's now ... show the keyboard .. // Process the time slot ..and reply acordingly [ Find Now Slot ] .. 
 
 bot.on(message('text'), async (ctx) => {
-	const menu_option = ctx.update.message.text ;
-	const selected_time: string | undefined = getMenuOption(menu_option);
+	
+	const user_intent = intent(ctx.update.message.text) ;
+	
+	const txt = ctx.update.message.text ;
+	const selected_time: string | undefined = getMenuOption(txt);
 	// If the user has selected a valid option
 	if (selected_time) {
 		const food = DATA_BASE[weekDay][selected_time];
@@ -70,8 +79,7 @@ bot.on(message('text'), async (ctx) => {
 	} else {
 		ctx.reply('please select from given options')
 	}
-	// If the user has not selected an option yet, send the available options
-	// await ctx.reply('Please Select the Time', keyboard.inline());
+
 	footerMessage(ctx) ;
 });
 
@@ -83,10 +91,7 @@ bot.on('callback_query', async (ctx: any) => {
 		ctx.reply(food);
 		footerMessage(ctx) ;
 	}
-
-
 });
-
 
 
 bot.launch();
