@@ -17,3 +17,6 @@ async function uploadImage(photoPath:any , CHAT_ID:string) {
 	  console.error('Error uploading photo:', error);
 	}
 }
+
+
+export { uploadImage } ;

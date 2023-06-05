@@ -8,6 +8,7 @@ import { getMenuOption } from './Utils/OptionsDecoder.js';
 import { greetMember } from './Messages/startGreet.js';
 import { getRandomEmoji } from './Messages/EmojiGenerator.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
+import { uploadImage } from './Utils/ImageUpload.js';
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
@@ -38,6 +39,16 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 });
 
 // for all the generic pourous message... 
+
+bot.command('upload' , async () => {
+	
+	for(let i = 0 ; i < 4 ; i++){
+		const imagPath = `c:/CODE_C/Projects/AIT_MESS_Telegram_Bot/public/images/FoodCourt/${i}.jpg` ;
+		uploadImage(imagPath,'CHAT_ID_HERE') 
+	}
+}) ;
+
+
 
 bot.on(message('text'), async (ctx) => {
 	// Get the option selected by the user from the message
