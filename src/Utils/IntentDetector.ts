@@ -37,10 +37,19 @@ function intent(data:string){
     // similar approach is used in ELASTIC SEARCH ..
 
     words.forEach( word => {
-        if(target.includes(word)) {
-            return word ;
+        // if(target.includes(word)) {
+        //     return word ;
+        // }
+
+        if(backwordMapping.has(word)){
+            const parent_word:string =  backwordMapping.get(word)!
+            return parent_word ;
         }
     })
+
+
+    // advance indent .. 
+
 }
 
 export { intent } ;
