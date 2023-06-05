@@ -49,8 +49,6 @@ bot.on(message('text'), async (ctx) => {
 	// ctx.telegram.getChat() ;
 });
 
-
-
 bot.on(message('photo'), async (ctx) => {
 	console.log(ctx);
 });
