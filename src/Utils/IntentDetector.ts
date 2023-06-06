@@ -17,11 +17,12 @@ function intent(data: string): string | undefined {
 		let alias: string[] = [word, word.toLowerCase()];
 		forwardMapping.set(word, alias);
 	});
-
-	let fc_alias = forwardMapping.get('FoodCourt');
-	if (fc_alias) fc_alias.push('fc');
-
-	if (fc_alias) forwardMapping.set('FoodCourt', fc_alias);
+	
+	
+	addTolist('fc', 'FoodCourt', forwardMapping);
+	// let fc_alias = forwardMapping.get('FoodCourt');
+	// if (fc_alias) fc_alias.push('fc');
+	// if (fc_alias) forwardMapping.set('FoodCourt', fc_alias);
 
 	let backwardMapping: Map<string, string> = new Map<string, string>();
 
@@ -35,20 +36,29 @@ function intent(data: string): string | undefined {
 	// simialr to DSU ( Disjoin set union )
 	// similar approach is used in ELASTIC SEARCH ..
 
+	let matched_word:string =  '';
 	words.forEach((word) => {
-		// if(target.includes(word)) {
-		//     return word ;
-		// }
-
 		if (backwardMapping.has(word)) {
 			const parent_word: string = backwardMapping.get(word)!;
+			matched_word = parent_word ;
 			return parent_word;
 		}
 	});
 
+	if(matched_word) return matched_word ;
 	return undefined;
+}
 
-	// advance indent ..
+
+async function addTolist(
+	toAdd: string,
+	target: string,
+	mp: Map<string, string[]>
+) {
+	
+	let aliasList = mp.get(target);
+	if (aliasList) aliasList.push(toAdd);
+	if (aliasList) mp.set(target, aliasList);
 }
 
 export { intent };

@@ -1,12 +1,15 @@
 import { Telegraf } from 'telegraf';
+import { message } from 'telegraf/filters';
 import dotenv from 'dotenv';
 import { DATA_BASE } from './Data/messMenu.js';
 import { weekDay } from './Utils/DayTime.js';
 import { Keyboard } from 'telegram-keyboard';
 import { greetMember } from './Messages/startGreet.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
-import { OACHandler } from './Messages/OACHandler.js';
-import { foodCourtHanlder } from './Messages/foodCourthanlder.js';
+import { OACHandler } from './Utils/Handlers/OACHandler.js';
+import { foodCourtHanlder } from './Utils/Handlers/foodCourtHandler.js';
+import { intent } from './Utils/IntentDetector.js';
+import { intentHanlder } from './Utils/Handlers/intentHandler.js';
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
 const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
@@ -48,19 +51,30 @@ bot.command('foodcourt', async (ctx) => {
 // Only use this for menu handling .... 
 // Menue Conntent ... [ Whata's now in mess  , OAC Menue , Foood Court Menue .... ] 
 // for what's now ... show the keyboard .. // Process the time slot ..and reply acordingly [ Find Now Slot ] .. 
-// bot.on(message('text'), async (ctx) => {
-// 	// const user_intent = intent(ctx.update.message.text) ;
-// 	const txt = ctx.update.message.text ;
-// 	const selected_time: string | undefined = getMenuOption(txt);
-// 	// If the user has selected a valid option
-// 	if (selected_time) {
-// 		const food = DATA_BASE[weekDay][selected_time];
-// 		await ctx.reply(food);
-// 	} else {
-// 		ctx.reply('please select from given options')
-// 	}
-// 	footerMessage(ctx) ;
-// });
+bot.on(message('text'), async (ctx) => {
+    const user_intent = intent(ctx.update.message.text);
+    // resposiblity of handler ==> take out the context's text and then print the apporpriate message 
+    console.log("USER INTENT [m] : ", user_intent);
+    if (user_intent) {
+        const hanlder = await intentHanlder(user_intent);
+        // will recive Hanlder .. 
+        // Hanlderthat will require contex ( ctx ) to diaplay the meessags
+        hanlder(ctx);
+    }
+    else {
+        ctx.reply('please select from given options');
+    }
+    // const txt = ctx.update.message.text ;
+    // const selected_time: string | undefined = getMenuOption(txt);
+    // // If the user has selected a valid option
+    // if (selected_time) {
+    // 	const food = DATA_BASE[weekDay][selected_time];
+    // 	await ctx.reply(food);
+    // } else {
+    // 	ctx.reply('please select from given options')
+    // }
+    footerMessage(ctx);
+});
 bot.on('callback_query', async (ctx) => {
     let selected_time = ctx.update.callback_query.data;
     if (selected_time) {

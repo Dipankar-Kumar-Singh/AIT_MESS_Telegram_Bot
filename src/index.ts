@@ -69,29 +69,17 @@ bot.command('foodcourt' , async(ctx) => {
 
 bot.on(message('text'), async (ctx) => {
 	
-	const user_intent = intent(ctx.update.message.text) ;
-
-	// will get a Hanlder .. that will require contex ( ctx ) to diaplay the meessags
-
+	const user_intent: string | undefined = intent(ctx.update.message.text)  ;
+	// undefined --> program not able to detect the intent of the user ..
+	type Intent_Handler = (ctx:any) => Promise<void> ; 
+	// resposiblity of handler ==> take out the context's text and then print the apporpriate message 
+	
 	if(user_intent)	{
-		const hanlder = await intentHanlder(user_intent) ;
+		const hanlder:Intent_Handler = await intentHanlder(user_intent) ;
 		hanlder(ctx) ;
 	}
-	else {
-		ctx.reply('please select from given options')
-	}
-	footerMessage(ctx) ;
-
-	// const txt = ctx.update.message.text ;
-	// const selected_time: string | undefined = getMenuOption(txt);
-	// // If the user has selected a valid option
-	// if (selected_time) {
-	// 	const food = DATA_BASE[weekDay][selected_time];
-	// 	await ctx.reply(food);
-	// } else {
-	// 	ctx.reply('please select from given options')
-	// }
-
+	else ctx.reply('please select from given options')
+	
 	footerMessage(ctx) ;
 });
 
