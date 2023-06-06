@@ -16,20 +16,16 @@ async function intentHanlder(uesr_intent:string): Promise<((ctx: any) => Promise
 
     switch (uesr_intent) {
         case Target.OAC:
-            console.log(Target.OAC) ;
             return OACHandler ;
             break;
         case Target.FoodCourt : 
-            console.log(Target.FoodCourt) ;
             return foodCourtHanlder ;
             break
         case Target.Now : 
-            console.log(Target.Now) ;
             return nowHanlder ;
             break
         default:
             // for the mess menu
-            console.log("Normal -> B L S D") ;
             return messsFoodHanlder ;
             break;
     }

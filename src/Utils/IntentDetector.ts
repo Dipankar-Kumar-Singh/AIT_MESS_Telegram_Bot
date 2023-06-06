@@ -1,13 +1,15 @@
+import { MealTime } from "../Data/messMenu.js";
+
 function intent(data: string): string | undefined {
 	const words = data.toLowerCase().split(' ');
-	console.log(words);
 
 	const target: string[] = [
 		'OAC',
 		'FoodCourt',
-		'Breakfast',
-		'Lunch',
-		'Dinner',
+		 MealTime.Breakfast ,
+		 MealTime.Lunch ,
+		 MealTime.Snacks ,
+		 MealTime.Dinner ,
 		'Now',
 	];
 
@@ -18,11 +20,7 @@ function intent(data: string): string | undefined {
 		forwardMapping.set(word, alias);
 	});
 	
-	
-	addTolist('fc', 'FoodCourt', forwardMapping);
-	// let fc_alias = forwardMapping.get('FoodCourt');
-	// if (fc_alias) fc_alias.push('fc');
-	// if (fc_alias) forwardMapping.set('FoodCourt', fc_alias);
+	extraAliasSupport(forwardMapping);
 
 	let backwardMapping: Map<string, string> = new Map<string, string>();
 
@@ -50,15 +48,34 @@ function intent(data: string): string | undefined {
 }
 
 
+async function extraAliasSupport( forwardMapping:Map<string, string[]>) {
+	addTolist('fc', 'FoodCourt', forwardMapping);
+	addTolist('morning', MealTime.Breakfast, forwardMapping);
+	addTolist('subah', MealTime.Breakfast, forwardMapping);
+	addTolist('shubha', MealTime.Breakfast, forwardMapping);
+	addTolist('afternoon', MealTime.Lunch, forwardMapping);
+	addTolist('dopehar', MealTime.Lunch, forwardMapping);
+	addTolist('dopahar', MealTime.Lunch, forwardMapping);
+	addTolist('dophar', MealTime.Lunch, forwardMapping);
+	addTolist('dopher', MealTime.Lunch, forwardMapping);
+	addTolist('saam', MealTime.Snacks, forwardMapping);
+	addTolist('sham', MealTime.Snacks, forwardMapping);
+	addTolist('sam', MealTime.Snacks, forwardMapping);
+	addTolist('raat', MealTime.Dinner, forwardMapping);
+	addTolist('rat', MealTime.Dinner, forwardMapping);
+
+} ;
+
+
 async function addTolist(
 	toAdd: string,
 	target: string,
-	mp: Map<string, string[]>
+	forwardMapping: Map<string, string[]>
 ) {
 	
-	let aliasList = mp.get(target);
+	let aliasList = forwardMapping.get(target);
 	if (aliasList) aliasList.push(toAdd);
-	if (aliasList) mp.set(target, aliasList);
+	if (aliasList) forwardMapping.set(target, aliasList);
 }
 
 export { intent };

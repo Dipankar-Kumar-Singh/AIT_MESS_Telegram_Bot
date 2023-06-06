@@ -54,25 +54,12 @@ bot.command('foodcourt', async (ctx) => {
 bot.on(message('text'), async (ctx) => {
     const user_intent = intent(ctx.update.message.text);
     // resposiblity of handler ==> take out the context's text and then print the apporpriate message 
-    console.log("USER INTENT [m] : ", user_intent);
     if (user_intent) {
         const hanlder = await intentHanlder(user_intent);
-        // will recive Hanlder .. 
-        // Hanlderthat will require contex ( ctx ) to diaplay the meessags
         hanlder(ctx);
     }
-    else {
+    else
         ctx.reply('please select from given options');
-    }
-    // const txt = ctx.update.message.text ;
-    // const selected_time: string | undefined = getMenuOption(txt);
-    // // If the user has selected a valid option
-    // if (selected_time) {
-    // 	const food = DATA_BASE[weekDay][selected_time];
-    // 	await ctx.reply(food);
-    // } else {
-    // 	ctx.reply('please select from given options')
-    // }
     footerMessage(ctx);
 });
 bot.on('callback_query', async (ctx) => {

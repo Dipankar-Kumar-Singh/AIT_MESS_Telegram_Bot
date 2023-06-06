@@ -13,7 +13,6 @@ async function intentHanlder(uesr_intent) {
         Target["Now"] = "Now";
     })(Target || (Target = {}));
     ;
-    console.log('uesr_intent : ', uesr_intent);
     switch (uesr_intent) {
         case Target.OAC:
             console.log(Target.OAC);

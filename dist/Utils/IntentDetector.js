@@ -1,12 +1,14 @@
+import { MealTime } from "../Data/messMenu.js";
 function intent(data) {
     const words = data.toLowerCase().split(' ');
     console.log(words);
     const target = [
         'OAC',
         'FoodCourt',
-        'Breakfast',
-        'Lunch',
-        'Dinner',
+        MealTime.Breakfast,
+        MealTime.Lunch,
+        MealTime.Snacks,
+        MealTime.Dinner,
         'Now',
     ];
     let forwardMapping = new Map();
@@ -14,10 +16,7 @@ function intent(data) {
         let alias = [word, word.toLowerCase()];
         forwardMapping.set(word, alias);
     });
-    addTolist('fc', 'FoodCourt', forwardMapping);
-    // let fc_alias = forwardMapping.get('FoodCourt');
-    // if (fc_alias) fc_alias.push('fc');
-    // if (fc_alias) forwardMapping.set('FoodCourt', fc_alias);
+    extraAliasSupport(forwardMapping);
     let backwardMapping = new Map();
     forwardMapping.forEach((alies_list, parent_word) => {
         alies_list.forEach((child_word) => {
@@ -39,11 +38,28 @@ function intent(data) {
         return matched_word;
     return undefined;
 }
-async function addTolist(toAdd, target, mp) {
-    let aliasList = mp.get(target);
+async function extraAliasSupport(forwardMapping) {
+    addTolist('fc', 'FoodCourt', forwardMapping);
+    addTolist('morning', MealTime.Breakfast, forwardMapping);
+    addTolist('subah', MealTime.Breakfast, forwardMapping);
+    addTolist('shubha', MealTime.Breakfast, forwardMapping);
+    addTolist('afternoon', MealTime.Lunch, forwardMapping);
+    addTolist('dopehar', MealTime.Lunch, forwardMapping);
+    addTolist('dopahar', MealTime.Lunch, forwardMapping);
+    addTolist('dophar', MealTime.Lunch, forwardMapping);
+    addTolist('dopher', MealTime.Lunch, forwardMapping);
+    addTolist('saam', MealTime.Snacks, forwardMapping);
+    addTolist('sham', MealTime.Snacks, forwardMapping);
+    addTolist('sam', MealTime.Snacks, forwardMapping);
+    addTolist('raat', MealTime.Dinner, forwardMapping);
+    addTolist('rat', MealTime.Dinner, forwardMapping);
+}
+;
+async function addTolist(toAdd, target, forwardMapping) {
+    let aliasList = forwardMapping.get(target);
     if (aliasList)
         aliasList.push(toAdd);
     if (aliasList)
-        mp.set(target, aliasList);
+        forwardMapping.set(target, aliasList);
 }
 export { intent };
