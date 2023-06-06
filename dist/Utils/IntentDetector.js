@@ -1,7 +1,6 @@
 import { MealTime } from "../Data/messMenu.js";
 function intent(data) {
     const words = data.toLowerCase().split(' ');
-    console.log(words);
     const target = [
         'OAC',
         'FoodCourt',

@@ -14,7 +14,6 @@ import { intent } from './Utils/IntentDetector.js';
 import { intentHanlder } from './Utils/Handlers/intentHandler.js';
 
 dotenv.config();
-
 const bot = new Telegraf(process.env.BOT_TOKEN || 'noKey');
 
 const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
@@ -69,6 +68,8 @@ bot.command('foodcourt' , async(ctx) => {
 
 bot.on(message('text'), async (ctx) => {
 	
+	console.log("Hello") ;
+
 	const user_intent: string | undefined = intent(ctx.update.message.text)  ;
 	// undefined --> program not able to detect the intent of the user ..
 	type Intent_Handler = (ctx:any) => Promise<void> ; 

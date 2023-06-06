@@ -52,6 +52,7 @@ bot.command('foodcourt', async (ctx) => {
 // Menue Conntent ... [ Whata's now in mess  , OAC Menue , Foood Court Menue .... ] 
 // for what's now ... show the keyboard .. // Process the time slot ..and reply acordingly [ Find Now Slot ] .. 
 bot.on(message('text'), async (ctx) => {
+    console.log("Hello");
     const user_intent = intent(ctx.update.message.text);
     // resposiblity of handler ==> take out the context's text and then print the apporpriate message 
     if (user_intent) {
