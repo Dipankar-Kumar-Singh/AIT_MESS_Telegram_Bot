@@ -4,6 +4,13 @@ interface MessMenu {
 	}
 }
 
+enum MealTime {
+	Breakfast = 'Breakfast',
+	Lunch = 'Lunch',
+	Snacks = 'Snacks',
+	Dinner = 'Dinner',
+};
+
 const DATA_BASE:MessMenu = {
 	Monday: {
 		'Breakfast': 'Pav Bhaji + Tea🍵',
@@ -50,4 +57,6 @@ const DATA_BASE:MessMenu = {
 };
 
 
-export { DATA_BASE } ;
+
+
+export { DATA_BASE , MealTime } ;
