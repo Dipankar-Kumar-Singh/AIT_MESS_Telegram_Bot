@@ -1,10 +1,9 @@
-import { MealTime } from "../../Data/messMenu.js";
-import { HourTime } from "../DayTime.js";
-import { messsFoodHanlder } from "./MessHandler.js";
+import { MealTime } from '../../Data/messMenu.js';
+import { HourTime, updateDateTime } from '../DayTime.js';
+import { messsFoodHanlder } from './MessHandler.js';
 async function nowHanlder(ctx) {
-    // const selected_time: string = ctx.update.message.text;
+    updateDateTime(ctx.update.message.date);
     let ctx_copy = ctx;
-    console.log('Time is in ', typeof HourTime, " TIME ", HourTime);
     const timeSlot = (HourTime) => {
         if (HourTime <= 9) {
             return MealTime.Breakfast;

@@ -2,7 +2,7 @@ import { Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
 import dotenv from 'dotenv';
 import { DATA_BASE } from './Data/messMenu.js';
-import { weekDay } from './Utils/DayTime.js';
+import { updateDateTime, updateTimeNow, weekDay } from './Utils/DayTime.js';
 import { Keyboard } from 'telegram-keyboard';
 import { greetMember } from './Messages/startGreet.js';
 import { decorateFoodOutput } from './Messages/Deorator.js';
@@ -30,6 +30,8 @@ bot.start(async (ctx) => {
 //!!!!!!!!!!!!!!TODO :  Add more generic .... add options to find intent of the user .. 
 // Add Natural Language Proccessing to it .... 
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
+    const dateTimeofClinet = ctx.update.message.date;
+    updateDateTime(dateTimeofClinet);
     const selected_time = ctx.update.message.text;
     let food = DATA_BASE[weekDay][selected_time];
     food = decorateFoodOutput(food);
@@ -48,25 +50,25 @@ bot.command('foodcourt', async (ctx) => {
     footerMessage(ctx);
 });
 // for all the generic pourous message... 
-// Only use this for menu handling .... 
-// Menue Conntent ... [ Whata's now in mess  , OAC Menue , Foood Court Menue .... ] 
-// for what's now ... show the keyboard .. // Process the time slot ..and reply acordingly [ Find Now Slot ] .. 
 bot.on(message('text'), async (ctx) => {
-    console.log("Hello");
+    console.log(ctx);
     const user_intent = intent(ctx.update.message.text);
     // resposiblity of handler ==> take out the context's text and then print the apporpriate message 
     if (user_intent) {
         const hanlder = await intentHanlder(user_intent);
         hanlder(ctx);
     }
-    else
+    else {
         ctx.reply('please select from given options');
+    }
     footerMessage(ctx);
 });
 bot.on('callback_query', async (ctx) => {
+    updateTimeNow();
     let selected_time = ctx.update.callback_query.data;
     if (selected_time) {
-        const food = DATA_BASE[weekDay][selected_time];
+        let food = DATA_BASE[weekDay][selected_time];
+        food = decorateFoodOutput(food);
         await ctx.answerCbQuery(`🙃 Enjoy your ${selected_time}`);
         ctx.reply(food);
         footerMessage(ctx);
