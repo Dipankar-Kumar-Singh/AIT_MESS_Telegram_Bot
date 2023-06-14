@@ -29,6 +29,18 @@ To get started with the College Mess Querying Telegram Bot, follow these steps:
 - Alternatively, type natural language queries to inquire about specific menu items.
 - The bot will respond with relevant menu information or clarifying questions if required.
 
+
+## Tech Stack
+
+The AIT Mess Querying Telegram Bot is built using the following technologies and libraries:
+
+- TypeScript: A statically typed superset of JavaScript that enhances code maintainability and scalability.
+- Telegraf: A modern and powerful Telegram Bot API framework for Node.js.
+- Telegram API: Version 2.0 of the Telegram Bot API, used for seamless communication between the bot and users.
+- Lite Inverted Index Map: A custom lightweight version of an inverted index map, inspired by Elasticsearch, for efficient intent detection.
+- Node.js: A JavaScript runtime environment that enables server-side execution of JavaScript code.
+- npm: A package manager for installing and managing project dependencies.
+
 ## Contributing
 
 Contributions to the College Mess Querying Telegram Bot project are welcome! If you find any issues or have suggestions for improvement, please feel free to submit a pull request or open an issue.
