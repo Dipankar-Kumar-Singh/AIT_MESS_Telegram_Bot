@@ -8,10 +8,7 @@ This Telegram bot project aims to provide students with information on daily men
 
 ![Mess-Bot-mockup](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/30defce8-abe0-4a88-a6d1-335901676b19)
 
-![bef785a8-daa4-4bcc-bbf3-dce6071c9c73](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/b6c99c41-c949-47a1-a215-7cd517214821)
-
-
-![23718734-bcca-4f67-bf6a-02d6569c1a1a](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/46fbc9e9-a0c1-41e4-a9aa-f3cd61ba6695)
+![bef785a8-daa4-4bcc-bbf3-dce6071c9c73](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/b6c99c41-c949-47a1-a215-7cd517214821) ![23718734-bcca-4f67-bf6a-02d6569c1a1a](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/46fbc9e9-a0c1-41e4-a9aa-f3cd61ba6695)
 
 
 
