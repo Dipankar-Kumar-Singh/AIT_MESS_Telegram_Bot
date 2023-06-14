@@ -21,7 +21,6 @@ const keyboard = Keyboard.make([['Breakfast', 'Lunch', 'Snacks', 'Dinner']])
 	.resize();
 
 async function footerMessage (ctx: any){
-	// await ctx.reply(getRandomEmoji()) ;
 	await ctx.reply('For more options : ↙️ Click ≡ Menu Button') ;
 	await ctx.reply('Anything else you want to know ? ' , keyboard.inline());
 }
@@ -32,11 +31,6 @@ bot.start(async (ctx)=>{
 	await ctx.reply('You can Also select Option from Keyboard At Bottom', keyboard.reply());
 })
 
-// The bot will respond to the user input with the appropriate meal by using the hears() method.
-// Main hanlder .. 
-
-//!!!!!!!!!!!!!!TODO :  Add more generic .... add options to find intent of the user .. 
-// Add Natural Language Proccessing to it .... 
 bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	const dateTimeofClinet = ctx.update.message.date ;
 	updateDateTime(dateTimeofClinet)
@@ -47,7 +41,6 @@ bot.hears(/Breakfast|Lunch|Snacks|Dinner/, async (ctx) => {
 	await ctx.reply(food);
 	footerMessage(ctx) ;
 });
-
 
 bot.command('mess' ,async (ctx) => {
 	await ctx.reply( "Select the Time " , keyboard.reply());
