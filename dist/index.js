@@ -51,7 +51,7 @@ bot.command('foodcourt', async (ctx) => {
 });
 // for all the generic pourous message... 
 bot.on(message('text'), async (ctx) => {
-    console.log(ctx);
+    ctx.reply("!! YO YOGI !!!");
     const user_intent = intent(ctx.update.message.text);
     // resposiblity of handler ==> take out the context's text and then print the apporpriate message 
     if (user_intent) {
