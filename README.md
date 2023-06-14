@@ -44,6 +44,14 @@ The AIT Mess Querying Telegram Bot is built using the following technologies and
 - Node.js: A JavaScript runtime environment that enables server-side execution of JavaScript code.
 - npm: A package manager for installing and managing project dependencies.
 
+## Backend Communication
+
+The College Mess Querying Telegram Bot utilizes the long polling method for backend communication. In this approach, the main server will be Telegram's own server, which maintains a long queue to process messages by default. The bot's own server is responsible for handling incoming requests and processing them accordingly. This setup ensures efficient and reliable communication between the bot and Telegram users.
+
+## Continuous Integration and Deployment
+
+To streamline the development process, this project has leveraged GitHub Actions for continuous integration and deployment (CI/CD). A GitHub Actions workflow has been set up to automatically build and deploy the bot from any push to the main branch. This allows for smooth and automated deployment to a Virtual Private Server (VPS) or other hosting environment.
+
 ## Contributing
 
 Contributions to the College Mess Querying Telegram Bot project are welcome! If you find any issues or have suggestions for improvement, please feel free to submit a pull request or open an issue.
