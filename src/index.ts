@@ -65,8 +65,6 @@ bot.command('foodcourt' , async(ctx) => {
 
 // for all the generic pourous message... 
 bot.on(message('text'), async (ctx) => {
-
-	ctx.reply("!! YO YOGI !!!") ;
  
 	const user_intent: string | undefined = intent(ctx.update.message.text)  ;
 	// undefined --> program not able to detect the intent of the user ..
