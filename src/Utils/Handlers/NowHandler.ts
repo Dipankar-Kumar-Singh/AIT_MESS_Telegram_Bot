@@ -9,9 +9,9 @@ async function nowHanlder(ctx: any) {
 	const timeSlot = (HourTime: number) => {
 		if (HourTime <= 9) {
 			return MealTime.Breakfast;
-		} else if (HourTime <= 2) {
+		} else if (HourTime <= 14) {
 			return MealTime.Lunch;
-		} else if (HourTime <= 6) {
+		} else if (HourTime <= 18) {
 			return MealTime.Snacks;
 		} else {
 			return MealTime.Dinner;

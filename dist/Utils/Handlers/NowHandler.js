@@ -4,14 +4,16 @@ import { messsFoodHanlder } from './MessHandler.js';
 async function nowHanlder(ctx) {
     updateDateTime(ctx.update.message.date);
     let ctx_copy = ctx;
+    // ctx.reply( HourTime ) ;
+    console.log("Time ", HourTime);
     const timeSlot = (HourTime) => {
         if (HourTime <= 9) {
             return MealTime.Breakfast;
         }
-        else if (HourTime <= 2) {
+        else if (HourTime <= 14) {
             return MealTime.Lunch;
         }
-        else if (HourTime <= 6) {
+        else if (HourTime <= 18) {
             return MealTime.Snacks;
         }
         else {
