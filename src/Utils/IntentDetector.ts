@@ -54,6 +54,8 @@ async function extraAliasSupport( forwardMapping:Map<string, string[]>) {
 	addTolist('subah', MealTime.Breakfast, forwardMapping);
 	addTolist('shubha', MealTime.Breakfast, forwardMapping);
 	addTolist('afternoon', MealTime.Lunch, forwardMapping);
+	addTolist('noon', MealTime.Lunch, forwardMapping);
+	addTolist('night', MealTime.Lunch, forwardMapping);
 	addTolist('dopehar', MealTime.Lunch, forwardMapping);
 	addTolist('dopahar', MealTime.Lunch, forwardMapping);
 	addTolist('dophar', MealTime.Lunch, forwardMapping);
