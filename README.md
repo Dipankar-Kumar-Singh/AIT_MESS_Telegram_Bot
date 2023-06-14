@@ -25,7 +25,7 @@ Support Natural Language query | Inline Keyboard Support
 --- | ---
 ![](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/b6c99c41-c949-47a1-a215-7cd517214821) | ![](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/46fbc9e9-a0c1-41e4-a9aa-f3cd61ba6695)
 
-Image1 | Image2
+First Interaction - Bot Start | Food Court - OAC Menu  
 --- | ---
  ![start](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/9ab3941d-5c09-4b63-a86b-00ab3775c5d2) | ![OAC](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/81a82d70-74fc-48c8-8ecc-02276f10836e)
 
