@@ -16,7 +16,7 @@ This Telegram bot project aims to provide students with information on daily men
 
 To get started with the College Mess Querying Telegram Bot, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/college-mess-bot.git`
+1. Clone the repository: `git clone https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot`
 2. Install dependencies: `npm install`
 3. Configure the bot token: Replace `BOT_TOKEN` in `.env` file with your Telegram bot token.
 4. Build the TypeScript code: `npm run build` or 'tsc'
