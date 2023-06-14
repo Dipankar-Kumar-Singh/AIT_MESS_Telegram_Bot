@@ -17,17 +17,13 @@ async function intentHanlder(uesr_intent:string): Promise<((ctx: any) => Promise
     switch (uesr_intent) {
         case Target.OAC:
             return OACHandler ;
-            break;
         case Target.FoodCourt : 
             return foodCourtHanlder ;
-            break
         case Target.Now : 
             return nowHanlder ;
-            break
         default:
             // for the mess menu
             return messsFoodHanlder ;
-            break;
     }
 }
 

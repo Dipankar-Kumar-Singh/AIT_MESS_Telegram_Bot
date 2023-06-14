@@ -19,6 +19,7 @@ async function nowHanlder(ctx) {
         }
     };
     const slot = timeSlot(HourTime);
+    // artifically molding the struct of ctx ( ctx of keyboard callback )
     ctx_copy.update.message.text = slot;
     messsFoodHanlder(ctx_copy);
 }
