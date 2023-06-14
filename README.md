@@ -41,6 +41,7 @@ To get started with the College Mess Querying Telegram Bot, follow these steps:
 - The bot will respond with relevant menu information or clarifying questions if required.
 
 
+
 ## Tech Stack
 
 The AIT Mess Querying Telegram Bot is built using the following technologies and libraries:
