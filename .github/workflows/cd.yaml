@@ -21,7 +21,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          cd ~/projects/AIT_MESS_TELEGRAM_BOT
+          cd /root/projects/AIT_MESS_TELEGRAM_BOT
           git pull origin main 
           git status
           pm2 restart index
