@@ -1,4 +1,4 @@
-# AIT MESS BOT -- Telegram Bot 
+# AIT MESS BOT 🤖 Telegram Bot 
 ## College Mess Querying Telegram Bot
 
 This Telegram bot project aims to provide students with information on daily menus for college mess and different canteens. It allows users to query the available food options and obtain detailed menu information. The bot is developed using TypeScript and the Telegraf library, built on top of the Telegram API 2.0.
