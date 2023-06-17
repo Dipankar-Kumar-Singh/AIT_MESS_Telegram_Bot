@@ -73,7 +73,7 @@ Contributions to the College Mess Querying Telegram Bot project are welcome! If 
 
 ## License
 
-This project is licensed under the [ISC License]().
+This project is licensed under the [LICENSE.md]().
 
 ## Acknowledgments
 
