@@ -3,13 +3,16 @@
 
 This Telegram bot project aims to provide students with information on daily menus for college mess and different canteens. It allows users to query the available food options and obtain detailed menu information. The bot is developed using TypeScript and the Telegraf library, built on top of the Telegram API 2.0.
 
+Yotube Link | Bot Link 
+--- | ---
+
+[![Screenshot 2023-06-17 131056](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/f2953e07-1bb5-4361-9b67-d4ef95f6ff0e)](https://youtu.be/iM2LnCbgQbM) | ![093669b6-76ca-42f1-995d-478074eeb061](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/85a14b97-cef9-40a8-8241-502492166fa2)
+
+
 # Use Now 
 ![505f3ce3-d1ca-41c3-b3d5-60c5b97a13ee](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/e14d44c1-0ec2-44f3-8414-d3c99fee5183)
 
 ![Mess-Bot-mockup](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/30defce8-abe0-4a88-a6d1-335901676b19)
-
-
-
 
 
 ## Features
@@ -45,7 +48,6 @@ To get started with the College Mess Querying Telegram Bot, follow these steps:
 - Use the provided inline keyboard options to select a mess or canteen.
 - Alternatively, type natural language queries to inquire about specific menu items.
 - The bot will respond with relevant menu information or clarifying questions if required.
-
 
 
 ## Tech Stack
