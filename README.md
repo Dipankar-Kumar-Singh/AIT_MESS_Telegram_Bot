@@ -5,8 +5,7 @@ This Telegram bot project aims to provide students with information on daily men
 
 Yotube Link | Bot Link 
 --- | ---
-[![](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/f2953e07-1bb5-4361-9b67-d4ef95f6ff0e)](https://youtu.be/iM2LnCbgQbM) | [![](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/85a14b97-cef9-40a8-8241-502492166fa2)](https://t.me/AIT_Mess_bot)
-
+[Youtube](https://youtu.be/iM2LnCbgQbM) | [Telegram bot](https://t.me/AIT_Mess_bot)
 
 # Use Now 
 ![505f3ce3-d1ca-41c3-b3d5-60c5b97a13ee](https://github.com/Dipankar-Kumar-Singh/AIT_MESS_Telegram_Bot/assets/66475186/e14d44c1-0ec2-44f3-8414-d3c99fee5183)
